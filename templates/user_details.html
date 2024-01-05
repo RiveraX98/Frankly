@@ -1,0 +1,32 @@
+{% extends "base.html"%} {%block title%}User Details{%endblock%}{%block
+content%}
+
+<h1 class="row justify-content-center">Welcome {{user.username}}</h1>
+<h4 class="row justify-content-center">Feedback Posted:</h4>
+{%for post in user.feedback%}
+
+<div class="container col-md-6">
+  <div class="card my-4 shadow-sm">
+    <div class="card-body">
+      <h4 class="card-title text-decoration-underline">
+        <b>{{post.title}}</b>
+      </h4>
+      <p class="card-text">{{post.content}}</p>
+      <div class="btn-group">
+        <form action="/feedback/{{post.id}}/update" , method="POST">
+          <button class="btn btn-outline-danger btn-sm">Edit</button>
+        </form>
+
+        <form action="/feedback/{{post.id}}/delete" , method="POST">
+          <button class="btn btn-outline-danger btn-sm">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{%endfor%}
+<form action="/users/{{user.id}}/feedback/add">
+  <button>Add Feedback</button>
+</form>
+
+{%endblock%}

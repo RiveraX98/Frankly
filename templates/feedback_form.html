@@ -1,0 +1,23 @@
+{% extends "base.html"%} {%block title%}Feedback form{%endblock%}{%block
+content%}
+
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <h1>Give Your Feedback</h1>
+    <form action="{{url}}" , method="POST">
+      {{form.hidden_tag()}} {% for field in form if field.widget.input_type !=
+      "hidden"%}
+      <p>
+        {{field.label}} {{field}} {%for errors in field.errors%} {{error}}
+        {%endfor%}
+      </p>
+      {%endfor%}
+      <button class="btn btn-outline-dark btn-sm">Submit</button>
+    </form>
+    <form action="/users/{{user.id}}">
+      <button class="btn btn-outline-dark btn-sm">Back</button>
+    </form>
+  </div>
+</div>
+
+{%endblock%}

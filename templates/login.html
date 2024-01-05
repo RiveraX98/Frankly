@@ -1,0 +1,26 @@
+{% extends "base.html"%} {%block title%}Login Form{%endblock%}{%block content%}
+
+<div class="row justify-content-md-center">
+  <div
+    class="col-md-7 col-lg-5"
+    style="margin: 5rem; background-color: rgb(218, 219, 221)"
+  >
+    <h1 class="join-message">Login</h1>
+
+    <form action="/login" , method="POST">
+      {{form.hidden_tag()}} {% for field in form if field.widget.input_type !=
+      "hidden"%}
+      <p>
+        {{field.label}} {{field}} {%for errors in field.errors%} {{error}}
+        {%endfor%}
+      </p>
+      {%endfor%}
+      <button>Login</button>
+    </form>
+    <br />
+    <p>Don't have an account?</p>
+    <nav><a href="/register">Sign up</a></nav>
+  </div>
+</div>
+
+{%endblock%}

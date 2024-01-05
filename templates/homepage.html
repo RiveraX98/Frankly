@@ -1,0 +1,25 @@
+{% extends "base.html"%} {%block title%}Registration Form{%endblock%}{%block
+content%}
+
+<h1 class="row justify-content-center">Provide Feedback</h1>
+<h4 class="row justify-content-center">Tell us how we did!</h4>
+
+{%for post in posts%}
+<div class="container-fluid col-md-6 shadow-sm">
+  <div class="card my-4">
+    <div class="card-header">
+      <p>{{post.user.username}}</p>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title"><b>{{post.title}}</b></h5>
+      <p class="card-text">{{post.content}}</p>
+      {%if session["user_id"] == post.user.id%}
+      <form action="/feedback/{{post.id}}/delete" , method="POST">
+        <button class="btn btn-sm" style="color: #e92b16">Delete</button>
+      </form>
+      {%endif%}
+    </div>
+  </div>
+</div>
+
+{%endfor%} {%endblock%}
