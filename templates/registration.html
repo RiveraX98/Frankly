@@ -1,23 +1,40 @@
-{% extends "base.html"%} {%block title%}Registration Form{%endblock%}{%block content%}
+{% extends "base.html"%} {%block title%}Registration Form{%endblock%}{%block
+content%}
 
-<h1>Create Your Account</h1>
+<!-- <h1>Create Your Account</h1>
 
-<form action="/register", method="POST">
-    {{form.hidden_tag()}}
+<form action="/register" , method="POST">
+  {{form.hidden_tag()}} {% for field in form if field.widget.input_type !=
+  "hidden"%}
 
-    {% for field in form
-        if field.widget.input_type != "hidden"%}
-            <p>{{field.label}}
-                {{field}}
+  <p>
+    {{field.label}} {{field}} {%for error in field.errors%} {{error}} {%endfor%}
+  </p>
+  {%endfor%}
+  <button>Submit</button>
+</form> -->
 
-                {%for errors in field.errors%}
-                    {{error}}
-                {%endfor%}
-            </p>
-    {%endfor%}
-    <button>Submit</button>
-</form>
+<div class="row justify-content-md-center">
+  <div
+    class="col-md-7 col-lg-5"
+    style="margin: 1rem; background-color: rgb(218, 219, 221)"
+  >
+    <h1 class="join-message">Create Your Account</h1>
 
-Already have an account? 
-<nav><a href="/login">Login</a></nav>
-{%endblock%}
+    <form action="/register" , method="POST">
+      {{form.hidden_tag()}} {% for field in form if field.widget.input_type !=
+      "hidden"%}
+      <p>{{field.label}} {{field (class_="form-control")}}</p>
+
+      {%for error in field.errors%}
+      <p class="form-text text-danger">{{error}}</p>
+
+      {%endfor%} {%endfor%}
+      <button>Submit</button>
+    </form>
+
+    Already have an account?
+    <nav><a href="/login">Login</a></nav>
+    {%endblock%}
+  </div>
+</div>

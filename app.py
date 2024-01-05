@@ -42,13 +42,12 @@ def handle_registration():
         try:
             db.session.commit()
         except IntegrityError:
-            form.username.errors.append(
-                "Username taken, Please try again", "danger")
+            form.username.errors.append("Username taken, Please try again")
             return render_template("registration.html", form=form)
 
         session["user_id"] = user.id
         flash("Account created successfully", "success")
-        return redirect(f"/users/{user.id}")
+        return redirect("/")
 
     return render_template("registration.html", form=form)
 
@@ -61,10 +60,11 @@ def handle_login():
         password = form.password.data
         user = User.authenticate(username, password)
         if user:
+            flash(f"Welcome, {user.username}!","success")
             session["user_id"] = user.id
             return redirect("/")
         else:
-            form.username.errors = ["invalid username/password"]
+            form.username.errors = ["Invalid username/password"]
 
     return render_template("login.html", form=form)
 

@@ -10,16 +10,17 @@
     <form action="/login" , method="POST">
       {{form.hidden_tag()}} {% for field in form if field.widget.input_type !=
       "hidden"%}
-      <p>
-        {{field.label}} {{field}} {%for errors in field.errors%} {{error}}
-        {%endfor%}
-      </p>
-      {%endfor%}
+      <p>{{field.label}} {{field (class_="form-control")}}</p>
+
+      {%for error in field.errors%}
+      <p class="form-text text-danger">{{error}}</p>
+
+      {%endfor%} {%endfor%}
       <button>Login</button>
     </form>
     <br />
     <p>Don't have an account?</p>
-    <nav><a href="/register">Sign up</a></nav>
+    <a href="/register">Sign up</a>
   </div>
 </div>
 
