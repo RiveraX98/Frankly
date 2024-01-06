@@ -1,8 +1,9 @@
 {% extends "base.html"%} {%block title%}User Details{%endblock%}{%block
 content%}
 
-<h1 class="row justify-content-center">Welcome {{user.username}}</h1>
-<h4 class="row justify-content-center">Feedback Posted:</h4>
+<h1 style="text-align: center">Welcome {{user.username}}</h1>
+<h4 style="text-align: center">Feedback Posted:</h4>
+
 {%for post in user.feedback%}
 
 <div class="container col-md-6">
@@ -25,8 +26,11 @@ content%}
   </div>
 </div>
 {%endfor%}
-<form action="/users/{{user.id}}/feedback/add">
-  <button>Add Feedback</button>
-</form>
+
+<div style="text-align: center">
+  <form action="/users/{{user.id}}/feedback/add">
+    <button>Add Feedback</button>
+  </form>
+</div>
 
 {%endblock%}

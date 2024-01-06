@@ -8,7 +8,7 @@ app = Flask(__name__)
 app.app_context().push()
 
 app.config['SQLALCHEMY_DATABASE_URI'] = (
-    os.environ.get('DATABASE_URL', "postgresql:///feedback" ))
+    os.environ.get('DATABASE_URL', 'postgresql:///feedback' ))
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_ECHO"] = True
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', "ihavesecret321")
@@ -25,6 +25,8 @@ def show_homepage():
     if "user_id" in session:
         user = User.query.get(session["user_id"])
         return render_template("homepage.html", posts=feedback, user=user)
+   
+    flash("Must be logged in", "danger")
     return redirect("/login")
 
 
@@ -134,6 +136,9 @@ def delete_feedback(feedback_id):
 @app.route("/secret")
 def show_secret():
     if "user_id" not in session:
-        flash("login to view this page", "danger")
+        flash("Login to view this page", "danger")
         return redirect("/login")
     return render_template("secret.html")
+
+
+
